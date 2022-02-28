@@ -1,2 +1,18 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+
+<% @posts.each do |post| %>
+  <article>
+    <h5><%= link_to post.title, post_path(post) %></h5>
+    <p><%= post.content %></p>
+    <p>Posted by <%= link_to post.user.name, profile_path(post.user) %>
+    on <%= post.created_at.to_formatted_s(:long_ordinal) %></p>
+    <p>
+    <%= link_to post_path(post) do %>
+    <%= "#{post.comments.count} #{"comment".pluralize(post.comments.count)}" %>
+    <% end %>
+    </p>
+  </article>
+  <hr>
+<% end %>
+
+</div>
